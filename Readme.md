@@ -8,4 +8,5 @@ O objetivo principal do DevToolkit é centralizar funções, classes e módulos 
 Conteúdos
 O DevToolkit inclui, mas não está limitado a:
 
-Carrinho Loja Virtual
+* Carrinho Loja Virtual
+* Editor de texto  
