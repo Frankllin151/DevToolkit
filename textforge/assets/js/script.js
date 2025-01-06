@@ -54,7 +54,7 @@ document.addEventListener('keydown', (event) => {
     }
 
     // Aplica o estilo ao item ativo
-    ListaEditor[index].style.backgroundColor = '#f0f0f0';
+    ListaEditor[index].style.backgroundColor = '#ddd';
   }
 });
 
@@ -214,9 +214,16 @@ function editorOptionTitle()
   let SizeTitulo = document.querySelector(".size-titulo");
   SizeTitulo.classList.remove("none-titulo-size")
   hideMenu()
+  showTituloSize()
 }
+
+function showTituloSize()
+{
+
 const listaSizeTitulo = document.querySelectorAll(".size-titulo li");
-let indexlista = 0; 
+
+
+let startTitulo = 0; 
 document.addEventListener("keydown" , (event) =>{
   const VisibleLista = !SizeTituloMenu.classList.contains("none-titulo-size");
   if(VisibleLista){
@@ -225,15 +232,35 @@ document.addEventListener("keydown" , (event) =>{
     })
   }
  if(event.key === "ArrowDown"){
-   indexlista = (indexlista + 1) % listaSizeTitulo.length;
+   startTitulo = (startTitulo + 1) % listaSizeTitulo.length;
  } else if(event.key === "ArrowUp"){
-  indexlista = (indexlista - 1 + listaSizeTitulo.length) % listaSizeTitulo.length
+  startTitulo = (startTitulo - 1 + listaSizeTitulo.length) % listaSizeTitulo.length
  } else if(event.key === "Enter"){
   event.preventDefault();
-  console.log(listaSizeTitulo[indexlista]);
+  CriarTituloH(listaSizeTitulo[startTitulo])
   
  }
- listaSizeTitulo[indexlista].style.backgroundColor = '#f0f0f0'
+ listaSizeTitulo[startTitulo].style.backgroundColor = '#ddd'
   
 
+ 
 })
+
+}
+
+
+function  CriarTituloH(tagH) 
+{
+ const TagTitulo = tagH.id.replace("h-" , "h");
+
+
+ const CreteTitulo = document.createElement(TagTitulo);
+ console.log(CreteTitulo);
+ editor.appendChild(CreteTitulo);
+ NoneMenuTitulo()
+}
+function NoneMenuTitulo()
+{
+  const sizetitulo = document.querySelector(".size-titulo");
+  sizetitulo.classList.add("none-titulo-size");
+}
