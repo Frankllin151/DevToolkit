@@ -249,15 +249,42 @@ document.addEventListener("keydown" , (event) =>{
 }
 
 
-function  CriarTituloH(tagH) 
-{
- const TagTitulo = tagH.id.replace("h-" , "h");
+function CriarTituloH(tagH) {
+  // Identifica o tipo de título a partir do ID
+  const TagTitulo = tagH.id.replace("h-", "h");
 
+  // Cria um input para o usuário digitar o texto
+  const inputTexto = document.createElement("input");
+  inputTexto.type = "text";
+  inputTexto.placeholder = `Digite o texto para ${TagTitulo}`;
+  inputTexto.id = "input-titulo";
 
- const CreteTitulo = document.createElement(TagTitulo);
- console.log(CreteTitulo);
- editor.appendChild(CreteTitulo);
- NoneMenuTitulo()
+  // Botão para confirmar a criação do título
+  const botaoConfirmar = document.createElement("button");
+  botaoConfirmar.textContent = "Criar Título";
+
+  // Insere o input e o botão no editor
+  editor.appendChild(inputTexto);
+  editor.appendChild(botaoConfirmar);
+
+  // Evento para criar o título com o texto digitado
+  botaoConfirmar.addEventListener("click", () => {
+    const texto = inputTexto.value;
+
+    if (texto.trim() !== "") {
+      // Cria o elemento de título com o texto digitado
+      const CreteTitulo = document.createElement(TagTitulo);
+      CreteTitulo.textContent = texto;
+
+      // Adiciona o título ao editor e remove o input e o botão
+      editor.appendChild(CreteTitulo);
+      editor.removeChild(inputTexto);
+      editor.removeChild(botaoConfirmar);
+      NoneMenuTitulo()
+    } else {
+      alert("Por favor, insira um texto para o título.");
+    }
+  });
 }
 function NoneMenuTitulo()
 {
