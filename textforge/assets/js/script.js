@@ -238,9 +238,9 @@ document.addEventListener("keydown" , (event) =>{
  } else if(event.key === "Enter"){
   event.preventDefault();
   
- console.log("Quando aperta entre criar outro input pelo function 'CriarTituloH()'");
  
-    CriarTituloH(listaSizeTitulo[startTitulo]);
+  console.log( listaSizeTitulo[startTitulo]);
+  
  
   
  }
@@ -252,22 +252,3 @@ document.addEventListener("keydown" , (event) =>{
 
 }
 
-
-function CriarTituloH(tagH) {
- switch(tagH.id){
-   case "h-1":
-   H1Grande()
-   NoneMenuTitulo()
-   break;
- }
-  
-}
-function NoneMenuTitulo()
-{
-  const sizetitulo = document.querySelector(".size-titulo");
-  sizetitulo.classList.add("none-titulo-size");
-}
-// Função para criar um título H1
-function H1Grande() {
- 
-}
