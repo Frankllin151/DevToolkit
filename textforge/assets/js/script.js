@@ -208,47 +208,62 @@ function createImage(src){
   editor.appendChild(img)
 }
 
-
-function editorOptionTitle()
-{
+function editorOptionTitle() {
   let SizeTitulo = document.querySelector(".size-titulo");
-  SizeTitulo.classList.remove("none-titulo-size")
-  hideMenu()
-  showTituloSize()
+  SizeTitulo.classList.remove("none-titulo-size");
+  hideMenu();
+  showTituloSize();
 }
 
-function showTituloSize()
-{
+function showTituloSize() {
+  const listaSizeTitulo = document.querySelectorAll(".size-titulo li");
+  const editor = document.querySelector("#editor"); // O editor
+  const input = document.querySelector("#titulo-texto");
+  const confirmButton = document.querySelector("#confirmar-titulo");
 
-const listaSizeTitulo = document.querySelectorAll(".size-titulo li");
+  let startTitulo = 0;
+  let selectedTitle = "h1"; // Título padrão
 
+  document.addEventListener("keydown", (event) => {
+    const VisibleLista = !document.querySelector(".size-titulo").classList.contains("none-titulo-size");
+    if (VisibleLista) {
+      listaSizeTitulo.forEach((item) => {
+        item.style.backgroundColor = "";
+      });
+    }
 
-let startTitulo = 0; 
-document.addEventListener("keydown" , (event) =>{
-  const VisibleLista = !SizeTituloMenu.classList.contains("none-titulo-size");
-  if(VisibleLista){
-    listaSizeTitulo.forEach((item)=>{
-      item.style.backgroundColor = '';
-    })
-  }
- if(event.key === "ArrowDown"){
-   startTitulo = (startTitulo + 1) % listaSizeTitulo.length;
- } else if(event.key === "ArrowUp"){
-  startTitulo = (startTitulo - 1 + listaSizeTitulo.length) % listaSizeTitulo.length
- } else if(event.key === "Enter"){
-  event.preventDefault();
-  
+    if (event.key === "ArrowDown") {
+      startTitulo = (startTitulo + 1) % listaSizeTitulo.length;
+    } else if (event.key === "ArrowUp") {
+      startTitulo = (startTitulo - 1 + listaSizeTitulo.length) % listaSizeTitulo.length;
+    } else if (event.key === "Enter") {
  
-  console.log( listaSizeTitulo[startTitulo]);
-  
- 
-  
- }
- listaSizeTitulo[startTitulo].style.backgroundColor = '#ddd'
-  
+     console.log("ola");
+     
+      selectedTitle = listaSizeTitulo[startTitulo].id.split("-")[1]; // Atualiza o título selecionado
+      input.focus(); // Move o foco para o input
+    }
 
- 
-})
 
+    listaSizeTitulo[startTitulo].style.backgroundColor = "#ddd";
+  });
+
+  // Botão de confirmação
+  confirmButton.addEventListener("click", () => {
+    const texto = input.value.trim(); // Texto digitado pelo usuário
+    if (!texto) {
+      alert("Por favor, digite um texto para o título.");
+      return;
+    }
+
+    // Cria o elemento de título
+    const titleElement = document.createElement(`h${selectedTitle}`);
+    titleElement.textContent = texto;
+  editor.appendChild(titleElement);
+  const lineBreak = document.createElement("br");
+  editor.appendChild(lineBreak);
+    // Limpa o input e esconde o menu
+    input.value = "";
+    document.querySelector(".size-titulo").classList.add("none-titulo-size");
+  });
 }
-
