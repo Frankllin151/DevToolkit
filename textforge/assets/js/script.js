@@ -72,7 +72,7 @@ function handleMenuAction(item) {
     editorOptionTitle()
       break;
     case 'paragrafo':
-      console.log('paragrafo');
+     Paragrafo();
       break;
     case 'link':
       editoLinks();
@@ -237,9 +237,6 @@ function showTituloSize() {
     } else if (event.key === "ArrowUp") {
       startTitulo = (startTitulo - 1 + listaSizeTitulo.length) % listaSizeTitulo.length;
     } else if (event.key === "Enter") {
- 
-     console.log("ola");
-     
       selectedTitle = listaSizeTitulo[startTitulo].id.split("-")[1]; // Atualiza o título selecionado
       input.focus(); // Move o foco para o input
     }
@@ -266,4 +263,20 @@ function showTituloSize() {
     input.value = "";
     document.querySelector(".size-titulo").classList.add("none-titulo-size");
   });
+}
+
+
+function Paragrafo() {
+  const editor = document.getElementById('editor');
+
+  // Criação do parágrafo
+  const newParagraph = document.createElement('p');
+  newParagraph.contentEditable = true; // Tornar o parágrafo editável
+  newParagraph.style.border = '1px solid #ccc'; // Estilo para visibilidade
+  newParagraph.style.padding = '10px'; // Para melhorar a aparência
+  newParagraph.style.marginTop = '5px'; // Adicionar margem
+  // Adicionar o parágrafo e o campo de entrada para o texto ao editor
+  editor.appendChild(newParagraph);
+  editor.appendChild(document.createElement('br'));
+  hideMenu();
 }
